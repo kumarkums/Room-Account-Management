@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "788622321408",
+    "firebase_url": "https://room-account-management.firebaseio.com",
+    "project_id": "room-account-management",
+    "storage_bucket": "room-account-management.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:788622321408:android:14aa3474f6d76981",
+        "android_client_info": {
+          "package_name": "com.roomaccountmanagement"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "788622321408-k9s6jrpne7dp0achlnn1nvb37qmv8ded.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.roomaccountmanagement",
+            "certificate_hash": "12e1fcbc44aed2c410e3547410c855fad0e95cc7"
+          }
+        },
+        {
+          "client_id": "788622321408-32ego9k0m5obe7ni6fa8efvsvt592gu8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAeQ4T7O0pPL7sMvuQ53mErXrlU5iD0pgQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "788622321408-32ego9k0m5obe7ni6fa8efvsvt592gu8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
