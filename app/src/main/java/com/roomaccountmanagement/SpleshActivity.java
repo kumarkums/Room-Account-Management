@@ -68,7 +68,6 @@ public class SpleshActivity extends AppCompatActivity {
         });
     }
 
-
     private void adminOrUserEmailChecking(String email_str) {
         FirebaseUtils checkutile = new FirebaseUtils(this);
         checkutile.CheckAdminOrUser(email_str, new CheckUserAdmin() {

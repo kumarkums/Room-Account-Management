@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -147,7 +148,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onComplete(@NonNull Task<AuthResult> task) {
                 Toasty.success(getApplicationContext(), "Registered Successfully", Toast.LENGTH_LONG).show();
                 alertDialog.dismiss();
-                UserDetails userDetails = new UserDetails(name, email, phoneNumber);
+                FirebaseUser firebaseUser=FirebaseUtils.getFirebaseUser();
+                String userUid=firebaseUser.getUid();
+                UserDetails userDetails = new UserDetails(name, email, phoneNumber,userUid);
                 databaseReference = FirebaseUtils.getDatabaseReference();
                 if (firebaseAuth.getCurrentUser() != null) {
                     databaseReference.child(MyCommon.USERDETAILS).child(FirebaseUtils.getFirebaseUser().getUid()).setValue(userDetails);

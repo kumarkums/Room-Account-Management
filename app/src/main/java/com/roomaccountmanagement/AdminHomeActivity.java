@@ -32,6 +32,7 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -52,7 +53,8 @@ public class AdminHomeActivity extends AppCompatActivity
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
     private FirebaseUser firebaseUser;
-    private TextView userNavTextView,todayNavExpanseTextView;
+    private TextView userNavTextView, todayNavExpanseTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,24 +73,23 @@ public class AdminHomeActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
     }
 
-    private void initial()
-    {
-        firebaseAuth= FirebaseUtils.getFirebaseAuth();
-        databaseReference=FirebaseUtils.getDatabaseReference();
-        userNavTextView=(TextView)findViewById(R.id.nav_users_id);
+    private void initial() {
+        firebaseAuth = FirebaseUtils.getFirebaseAuth();
+        databaseReference = FirebaseUtils.getDatabaseReference();
+        userNavTextView = (TextView) findViewById(R.id.nav_users_id);
         userNavTextView.setOnClickListener(this);
-        todayNavExpanseTextView=(TextView)findViewById(R.id.nav_today_expanse);
+        todayNavExpanseTextView = (TextView) findViewById(R.id.nav_today_expanse);
         todayNavExpanseTextView.setOnClickListener(this);
+        Fragment fragment = new AllUserDetails(this);
+        commonFragment(fragment);
     }
 
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START))
-        {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        }
-        else {
+        } else {
             super.onBackPressed();
         }
     }
@@ -109,10 +110,9 @@ public class AdminHomeActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.logout_icon) {
-            if (firebaseAuth.getCurrentUser() != null)
-            {
+            if (firebaseAuth.getCurrentUser() != null) {
                 firebaseAuth.signOut();
-                startActivity(new Intent(AdminHomeActivity.this,LoginActivity.class));
+                startActivity(new Intent(AdminHomeActivity.this, LoginActivity.class));
                 finish();
             }
             return true;
@@ -123,16 +123,15 @@ public class AdminHomeActivity extends AppCompatActivity
 
     @Override
     public void onClick(View v) {
-        switch (v.getId())
-        {
+        switch (v.getId()) {
             case R.id.nav_users_id:
-                Fragment fragment=new AllUserDetails(this);
+                Fragment fragment = new AllUserDetails(this);
                 commonFragment(fragment);
                 drawerClose();
                 break;
 
             case R.id.nav_today_expanse:
-                Fragment fragment1=new ExpanseFragment(this);
+                Fragment fragment1 = new ExpanseFragment(this);
                 commonFragment(fragment1);
                 drawerClose();
                 break;
@@ -142,18 +141,56 @@ public class AdminHomeActivity extends AppCompatActivity
         }
     }
 
-    private void drawerClose()
-    {
+    private void drawerClose() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
     }
 
-    private void commonFragment(Fragment fragment)
-    {
-        FragmentManager fragmentManager=getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.admin_content,fragment);
+    public void commonFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.admin_content, fragment);
         fragmentTransaction.commit();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        final ArrayList<UserDetails> userDetails = new ArrayList<>();
+        final ArrayList<String> userUid = new ArrayList<>();
+        databaseReference.child("UserDetails").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                String st=dataSnapshot.getKey();
+                userDetails.add(new UserDetails(st));
+                userUid.clear();
+                for (int i=0;i<userDetails.size();i++)
+                {
+                    userUid.add(userDetails.get(i).getUserUid());
+                }
+                Log.d("StringUsersKey"," "+userUid.size());
+                Log.d("StringUsersKey"," "+userUid);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
 }

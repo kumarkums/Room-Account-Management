@@ -2,7 +2,7 @@ package userDetails;
 
 public class UserDetails
 {
-    public String userName,userEmail,userPhoneNumber;
+    public String userName,userEmail,userPhoneNumber,userUid;
 
     public boolean checkUser=false;
 
@@ -17,10 +17,17 @@ public class UserDetails
     public UserDetails() {
     }
 
-    public UserDetails(String userName, String userEmail, String userPhoneNumber) {
+
+    public void setUserUid(String userUid) {
+        this.userUid = userUid;
+    }
+
+    public UserDetails(String userName, String userEmail, String userPhoneNumber, String userUid) {
+
         this.userName = userName;
         this.userEmail = userEmail;
         this.userPhoneNumber = userPhoneNumber;
+        this.userUid = userUid;
     }
 
     public UserDetails(String userName, boolean checkUser) {
@@ -50,5 +57,13 @@ public class UserDetails
 
     public void setUserPhoneNumber(String userPhoneNumber) {
         this.userPhoneNumber = userPhoneNumber;
+    }
+
+    public UserDetails(String userUid) {
+        this.userUid = userUid;
+    }
+
+    public String getUserUid() {
+        return userUid;
     }
 }

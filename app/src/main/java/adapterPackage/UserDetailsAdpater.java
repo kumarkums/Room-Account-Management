@@ -82,6 +82,7 @@ public class UserDetailsAdpater extends RecyclerView.Adapter<UserDetailsAdpater.
 
             personCheckBox = (CheckBox) itemView.findViewById(R.id.person_check_box);
             personTextView = (TextView) itemView.findViewById(R.id.person_text_view);
+            personCheckBox.setEnabled(false);
         }
     }
 }
