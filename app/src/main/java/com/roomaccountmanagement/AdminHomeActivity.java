@@ -156,41 +156,7 @@ public class AdminHomeActivity extends AppCompatActivity
     @Override
     protected void onStart() {
         super.onStart();
-        final ArrayList<UserDetails> userDetails = new ArrayList<>();
-        final ArrayList<String> userUid = new ArrayList<>();
-        databaseReference.child("UserDetails").addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                String st=dataSnapshot.getKey();
-                userDetails.add(new UserDetails(st));
-                userUid.clear();
-                for (int i=0;i<userDetails.size();i++)
-                {
-                    userUid.add(userDetails.get(i).getUserUid());
-                }
-                Log.d("StringUsersKey"," "+userUid.size());
-                Log.d("StringUsersKey"," "+userUid);
-            }
 
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
     }
 }

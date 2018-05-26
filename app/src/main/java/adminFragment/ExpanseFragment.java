@@ -3,6 +3,7 @@ package adminFragment;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,7 +27,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.roomaccountmanagement.AdminHomeActivity;
 import com.roomaccountmanagement.R;
 
+import org.w3c.dom.Text;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import Utils.CustomDialog;
 import Utils.CustomProgressDialog;
@@ -43,6 +50,10 @@ public class ExpanseFragment extends Fragment implements View.OnClickListener
     private DatabaseReference databaseReference;
 
     private CustomProgressDialog customProgressDialog;
+    private TextView expansiveTextView,eveAmountTextView;
+    private EditText eveningEditText,morningAmountTextView;
+    private String amount;
+    public static String currentDate;
     public ExpanseFragment(Context context) {
         this.context = context;
     }
@@ -71,6 +82,17 @@ public class ExpanseFragment extends Fragment implements View.OnClickListener
         morningExpansive.setOnClickListener(this);
         eveningExpanse=(TextView)view.findViewById(R.id.expanse_eve_persons);
         eveningExpanse.setOnClickListener(this);
+        morningAmountTextView=(EditText) view.findViewById(R.id.morning_amount_id);
+        eveningEditText=(EditText)view.findViewById(R.id.evening_amount_id);
+        eveAmountTextView=(TextView)view.findViewById(R.id.expanse_eve_persons);
+        eveAmountTextView.setOnClickListener(this);
+        expansiveTextView=(TextView)view.findViewById(R.id.expansive_date_textView);
+
+        DateFormat dateFormat=new SimpleDateFormat("dd:MM:yyyy");
+        Date date=new Date();
+        currentDate=dateFormat.format(date);
+        expansiveTextView.setText(currentDate);
+        Log.d("DateMonthYear"," "+currentDate);
     }
 
     @Override
@@ -80,7 +102,59 @@ public class ExpanseFragment extends Fragment implements View.OnClickListener
             case R.id.expanse_mor_persons:
             //    customProgressDialog.show();
                 Fragment fragment1=new MoneyAddingFragment(context);
-                commonFragment(fragment1);
+                if (morningAmountTextView.getText().toString().trim().length() == 0)
+                {
+                    AlertDialog.Builder builder=new AlertDialog.Builder(context,AlertDialog.THEME_HOLO_DARK);
+                    builder.setTitle("Waring...");
+                    builder.setMessage("Enter the amount");
+                    builder.setCancelable(false);
+                    final AlertDialog alertDialog=builder.create();
+                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                        }
+                    });
+
+                    builder.show();
+                }
+                else {
+                    amount=morningAmountTextView.getText().toString().trim();
+                    Bundle bundle=new Bundle();
+                    bundle.putString("AMOUNT",amount);
+                    fragment1.setArguments(bundle);
+                    commonFragment(fragment1);
+                    Log.d("amountTextViewText"," "+morningAmountTextView.getText().toString());
+                }
+                break;
+
+            case R.id.expanse_eve_persons:
+                //    customProgressDialog.show();
+                Fragment fragment2=new MoneyAddingFragment(context);
+                if (eveningEditText.getText().toString().trim().length() == 0)
+                {
+                    AlertDialog.Builder builder=new AlertDialog.Builder(context,AlertDialog.THEME_HOLO_DARK);
+                    builder.setTitle("Waring...");
+                    builder.setMessage("Enter the amount");
+                    builder.setCancelable(false);
+                    final AlertDialog alertDialog=builder.create();
+                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    builder.show();
+                }
+                else {
+                    amount=eveningEditText.getText().toString().trim();
+                    Bundle bundle=new Bundle();
+                    bundle.putString("AMOUNT",amount);
+                    fragment2.setArguments(bundle);
+                    commonFragment(fragment2);
+                    Log.d("amountTextViewText"," "+eveningEditText.getText().toString());
+                }
                 break;
             default:
                 break;

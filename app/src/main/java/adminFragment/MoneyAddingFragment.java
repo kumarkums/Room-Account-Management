@@ -1,12 +1,15 @@
 package adminFragment;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -22,7 +25,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.roomaccountmanagement.R;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import Utils.CustomDialog;
 import Utils.CustomProgressDialog;
@@ -40,6 +50,9 @@ public class MoneyAddingFragment extends Fragment
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
     private CustomProgressDialog customProgressDialog;
+    public static String amountHere;
+    private ArrayList<String> userUid = new ArrayList<>();
+    public static TextView amountTextView;
 
     public MoneyAddingFragment(Context context) {
         this.context = context;
@@ -64,7 +77,11 @@ public class MoneyAddingFragment extends Fragment
         firebaseAuth= FirebaseUtils.getFirebaseAuth();
         databaseReference=FirebaseUtils.getDatabaseReference();
         recyclerView=(RecyclerView)view.findViewById(R.id.recycler_view_function);
+        amountTextView=(TextView)view.findViewById(R.id.amount_textView);
         ok=(TextView)view.findViewById(R.id.user_check_box_ok);
+        gettingUserDetails();
+        amountHere=getArguments().getString("AMOUNT");
+        amountTextView.setText(amountHere.toString());
     }
 
     public void usersShowingFunction()
@@ -79,14 +96,23 @@ public class MoneyAddingFragment extends Fragment
             customProgressDialog.dismiss();
         }
         ok.setOnClickListener(new View.OnClickListener() {
+            @TargetApi(Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
+
+                Log.d("CurrentDate"," "+ExpanseFragment.currentDate);
+
                 final ArrayList<String> strings = new ArrayList<>();
+                final ArrayList<String> stringsUid = new ArrayList<>();
                 strings.clear();
+
                 for (int i = 0; i < userDetails.size(); i++) {
-                    if (userDetails.get(i).isCheckUser()) {
+                    if (userDetails.get(i).isCheckUser())
+                    {
                         strings.add(userDetails.get(i).getUserName());
-                        Log.d("CheckedUserDetails", " " + strings);
+                        //getting selected user uid
+                        stringsUid.add(userDetails.get(i).getUserUid());
+                        Log.d("CheckedUserDetails", " " + stringsUid);
                     }
                 }
             }
@@ -94,14 +120,16 @@ public class MoneyAddingFragment extends Fragment
         });
     }
     public void gettingUserDetails() {
-        userDetails.clear();
+
         databaseReference.child("UserDetails").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 String name = dataSnapshot.child("userName").getValue(String.class);
-                userDetails.add(new UserDetails(name, false));
+                String st=dataSnapshot.getKey();
+                userDetails.add(new UserDetails(name, st,false));
+                                     Log.d("CheckedUserDetails", " " + userDetails.get(0).getUserUid());
                 usersShowingFunction();
-                Log.d("UserDetails"," "+userDetails);
+
             }
 
             @Override
@@ -129,6 +157,6 @@ public class MoneyAddingFragment extends Fragment
     @Override
     public void onStart() {
         super.onStart();
-        gettingUserDetails();
     }
+
 }

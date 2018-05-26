@@ -17,6 +17,11 @@ public class UserDetails
     public UserDetails() {
     }
 
+    public UserDetails(String userName, String userUid, boolean checkUser) {
+        this.userName = userName;
+        this.userUid = userUid;
+        this.checkUser = checkUser;
+    }
 
     public void setUserUid(String userUid) {
         this.userUid = userUid;

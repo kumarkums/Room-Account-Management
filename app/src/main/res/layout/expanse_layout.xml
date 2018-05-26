@@ -31,13 +31,15 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="30dp"
+
             android:gravity="end"
             android:layout_weight="0.1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
         <TextView
+            android:layout_marginRight="30dp"
+            android:id="@+id/expansive_date_textView"
             android:gravity="end"
             android:textStyle="bold"
             android:textSize="10pt"
@@ -47,10 +49,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
             <TextView
+                android:layout_marginRight="10dp"
                 android:layout_weight="0.03"
                 android:gravity="center"
                 android:textColor="@color/light_sky_blue"
-                android:text=".........................................................................................."
+                android:text="..............................................................................................."
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             </TextView>
@@ -84,6 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <EditText
+                android:id="@+id/morning_amount_id"
                 android:inputType="number"
                 android:backgroundTint="@color/dark_sky_blue"
                 android:gravity="center"
@@ -138,6 +142,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <EditText
+                android:id="@+id/evening_amount_id"
                 android:inputType="number"
                 android:layout_marginLeft="5dp"
                 android:backgroundTint="@color/alizarin"
@@ -176,8 +181,6 @@
                 android:layout_height="wrap_content">
             </TextView>
             <LinearLayout
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="30dp"
                 android:gravity="center"
                 android:layout_weight="0.1"
                 android:layout_width="match_parent"
