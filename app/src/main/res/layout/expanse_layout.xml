@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:weightSum="0.6"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
+            android:gravity="center"
+            android:layout_weight="0.1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textStyle="bold"
+                android:textSize="10pt"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"
+                android:hint="PerDay Expansive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+
+            android:gravity="end"
+            android:layout_weight="0.1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_marginRight="30dp"
+            android:id="@+id/expansive_date_textView"
+            android:gravity="end"
+            android:textStyle="bold"
+            android:textSize="10pt"
+            android:textColorHint="@color/dark_orange"
+            android:textColor="@color/dark_orange"
+            android:hint="Date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginRight="10dp"
+                android:layout_weight="0.03"
+                android:gravity="center"
+                android:textColor="@color/light_sky_blue"
+                android:text="..............................................................................................."
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </TextView>
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_weight="0.4"
+            android:weightSum="0.5"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_weight="0.1"
+            android:layout_marginTop="10dp"
+            android:weightSum="0.6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:gravity="center"
+                android:layout_weight="0.15"
+                android:textStyle="bold"
+                android:textSize="10pt"
+                android:textColorHint="@color/forest_green"
+                android:textColor="@color/forest_green"
+                android:text="Morning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/morning_amount_id"
+                android:inputType="number"
+                android:backgroundTint="@color/dark_sky_blue"
+                android:gravity="center"
+                android:layout_weight="0.25"
+                android:textStyle="bold"
+                android:textSize="10pt"
+                android:textColorHint="@color/forest_green"
+                android:textColor="@color/forest_green"
+                android:hint="Amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/expanse_mor_persons"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:background="@drawable/sign_up_back"
+                android:gravity="center"
+                android:layout_weight="0.2"
+                android:textStyle="bold"
+                android:textSize="10pt"
+                android:textColorHint="@color/forest_green"
+                android:textColor="@color/forest_green"
+                android:hint="Persons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+            <TextView
+                android:layout_weight="0.03"
+                android:gravity="center"
+                android:textColor="@color/light_sky_blue"
+                android:text=".........................................................................................."
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </TextView>
+            <LinearLayout
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_weight="0.1"
+            android:weightSum="0.6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:gravity="center"
+                android:layout_weight="0.15"
+                android:textStyle="bold"
+                android:textSize="10pt"
+                android:textColorHint="@color/alizarin"
+                android:textColor="@color/alizarin"
+                android:text="Evening"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/evening_amount_id"
+                android:inputType="number"
+                android:layout_marginLeft="5dp"
+                android:backgroundTint="@color/alizarin"
+                android:gravity="center"
+                android:layout_weight="0.3"
+                android:textStyle="bold"
+                android:textSize="10pt"
+                android:textColorHint="@color/alizarin"
+                android:textColor="@color/alizarin"
+                android:hint="Amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/expanse_eve_persons"
+                android:paddingLeft="9dp"
+                android:paddingRight="9dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:background="@drawable/sign_up_back"
+                android:gravity="center"
+                android:layout_weight="0.15"
+                android:textStyle="bold"
+                android:textSize="10pt"
+                android:textColorHint="@color/alizarin"
+                android:textColor="@color/alizarin"
+                android:hint="Persons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+            <TextView
+                android:layout_weight="0.01"
+                android:gravity="center"
+                android:textColor="@color/light_sky_blue"
+                android:text=".........................................................................................."
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </TextView>
+            <LinearLayout
+                android:gravity="center"
+                android:layout_weight="0.1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:background="@drawable/sign_in_back"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:text="F I N I S H"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
