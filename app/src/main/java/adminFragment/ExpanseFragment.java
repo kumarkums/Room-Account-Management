@@ -137,7 +137,6 @@ public class ExpanseFragment extends Fragment implements View.OnClickListener
                     builder.setTitle("Waring...");
                     builder.setMessage("Enter the amount");
                     builder.setCancelable(false);
-                    final AlertDialog alertDialog=builder.create();
                     builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

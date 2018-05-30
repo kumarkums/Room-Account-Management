@@ -150,7 +150,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 alertDialog.dismiss();
                 FirebaseUser firebaseUser=FirebaseUtils.getFirebaseUser();
                 String userUid=firebaseUser.getUid();
-                UserDetails userDetails = new UserDetails(name, email, phoneNumber,userUid);
+                UserDetails userDetails = new UserDetails(name, email, phoneNumber);
                 databaseReference = FirebaseUtils.getDatabaseReference();
                 if (firebaseAuth.getCurrentUser() != null) {
                     databaseReference.child(MyCommon.USERDETAILS).child(FirebaseUtils.getFirebaseUser().getUid()).setValue(userDetails);
@@ -205,5 +205,4 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             adminOrUserEmailChecking(MyCommon.ADMINDETAILS, s);
         }
     }
-
 }

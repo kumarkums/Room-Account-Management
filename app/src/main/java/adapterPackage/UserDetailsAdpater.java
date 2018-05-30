@@ -56,11 +56,33 @@ public class UserDetailsAdpater extends RecyclerView.Adapter<UserDetailsAdpater.
             public void onClick(View v)
             {
 
+                /*if (holder.personCheckBox.isChecked())
+                {
+                    strings.get(position).setCheckUser(false);
+                    if (i>=0)
+                    {
+                        i--;
+                        MoneyAddingFragment.amountTextView.setText(amountDividing(MoneyAddingFragment.amountHere,i));
+                    }
+                    else if (i==1)
+                    {
+                        i=0;
+                        MoneyAddingFragment.amountTextView.setText(amountDividing(MoneyAddingFragment.amountHere,i));
+                    }
+                    notifyDataSetChanged();
+                }
+                else
+                {
+                    strings.get(position).setCheckUser(true);
+                    Log.d("ItemsCount"," "+strings.get(position).isCheckUser());
+                    MoneyAddingFragment.amountTextView.setText(amountDividing(MoneyAddingFragment.amountHere,i));
+                }*/
                     if (checkBox == false)
                     {
                         strings.get(position).setCheckUser(true);
                         i++;
-                        Log.d("ItemsCount"," "+i);
+                        Log.d("ItemsCount"," "+strings.get(position).isCheckUser());
+                        notifyDataSetChanged();
                         MoneyAddingFragment.amountTextView.setText(amountDividing(MoneyAddingFragment.amountHere,i));
                     }
                     else
@@ -75,14 +97,13 @@ public class UserDetailsAdpater extends RecyclerView.Adapter<UserDetailsAdpater.
                             i=0;
                             MoneyAddingFragment.amountTextView.setText(amountDividing(MoneyAddingFragment.amountHere,i));
                         }
-
+                        notifyDataSetChanged();
                         strings.get(position).setCheckUser(false);
                         Log.d("ItemsCount1"," "+i);
                         //
                     }
-                    holder.personCheckBox.setChecked(userDetails.isCheckUser());
-
                     notifyDataSetChanged();
+                    holder.personCheckBox.setChecked(userDetails.isCheckUser());
             }
         });
     }

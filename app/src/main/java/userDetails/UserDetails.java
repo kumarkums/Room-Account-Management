@@ -27,12 +27,11 @@ public class UserDetails
         this.userUid = userUid;
     }
 
-    public UserDetails(String userName, String userEmail, String userPhoneNumber, String userUid) {
+    public UserDetails(String userName, String userEmail, String userPhoneNumber) {
 
         this.userName = userName;
         this.userEmail = userEmail;
         this.userPhoneNumber = userPhoneNumber;
-        this.userUid = userUid;
     }
 
     public UserDetails(String userName, boolean checkUser) {
