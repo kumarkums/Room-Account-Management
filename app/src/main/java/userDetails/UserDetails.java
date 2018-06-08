@@ -6,25 +6,17 @@ public class UserDetails
 
     public boolean checkUser=false;
 
-    public boolean isCheckUser() {
-        return checkUser;
-    }
 
-    public void setCheckUser(boolean checkUser) {
-        this.checkUser = checkUser;
-    }
 
-    public UserDetails() {
+    public UserDetails()
+    {
+
     }
 
     public UserDetails(String userName, String userUid, boolean checkUser) {
         this.userName = userName;
         this.userUid = userUid;
         this.checkUser = checkUser;
-    }
-
-    public void setUserUid(String userUid) {
-        this.userUid = userUid;
     }
 
     public UserDetails(String userName, String userEmail, String userPhoneNumber) {
@@ -37,6 +29,14 @@ public class UserDetails
     public UserDetails(String userName, boolean checkUser) {
         this.userName = userName;
         this.checkUser = checkUser;
+    }
+
+    public UserDetails(String userUid) {
+        this.userUid = userUid;
+    }
+
+    public void setUserUid(String userUid) {
+        this.userUid = userUid;
     }
 
     public String getUserName() {
@@ -63,8 +63,12 @@ public class UserDetails
         this.userPhoneNumber = userPhoneNumber;
     }
 
-    public UserDetails(String userUid) {
-        this.userUid = userUid;
+    public boolean isCheckUser() {
+        return checkUser;
+    }
+
+    public void setCheckUser(boolean checkUser) {
+        this.checkUser = checkUser;
     }
 
     public String getUserUid() {

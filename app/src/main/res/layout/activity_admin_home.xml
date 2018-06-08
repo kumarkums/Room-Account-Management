@@ -82,17 +82,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <ImageView
-                    android:background="@drawable/expanse"
+                    android:background="@drawable/calculate"
                     android:layout_gravity="center"
                     android:layout_width="20dp"
                     android:layout_height="20dp" />
                 <TextView
+                    android:id="@+id/nav_calcualte"
                     android:layout_marginLeft="20dp"
                     android:textSize="8pt"
                     android:layout_gravity="center"
                     android:textStyle="bold"
                     android:textColor="@color/white"
-                    android:text="T O D A Y    E X P A N S E"
+                    android:text="C A L C U L A T E"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>

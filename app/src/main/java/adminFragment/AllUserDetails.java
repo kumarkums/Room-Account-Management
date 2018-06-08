@@ -73,14 +73,14 @@ public class AllUserDetails extends Fragment
     {
         firebaseAuth= FirebaseUtils.getFirebaseAuth();
         databaseReference=FirebaseUtils.getDatabaseReference();
-        databaseReference.child("UserDetails").addChildEventListener(new ChildEventListener() {
+        databaseReference.child(FirebaseUtils.USERS_DETAILS_STRING).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 //UserDetails userDetails1=dataSnapshot.child("userEmail").getValue(UserDetails.class);
 
-                String email=dataSnapshot.child("userEmail").getValue(String.class);
-                String name=dataSnapshot.child("userName").getValue(String.class);
-                String phone=dataSnapshot.child("userPhoneNumber").getValue(String.class);
+                String email=dataSnapshot.child(FirebaseUtils.USER_EMAIL_STRING).getValue(String.class);
+                String name=dataSnapshot.child(FirebaseUtils.USER_NAME_STRING).getValue(String.class);
+                String phone=dataSnapshot.child(FirebaseUtils.USER_PHONENUMBER_STRING).getValue(String.class);
                 adminSideUserDetails.add(new AdminSideUserDetails(name, email, phone));
                 userDetails();
             }

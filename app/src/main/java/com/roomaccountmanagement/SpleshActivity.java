@@ -73,10 +73,12 @@ public class SpleshActivity extends AppCompatActivity {
         checkutile.CheckAdminOrUser(email_str, new CheckUserAdmin() {
             @Override
             public void CheckUserOrAdmin(String adminDetails) {
-                if (adminDetails.equals("Admin")) {
+                if (adminDetails.equals("Admin"))
+                {
                     startActivity(new Intent(SpleshActivity.this, AdminHomeActivity.class));
                     finish();
-                } else if (adminDetails.equals("User")) {
+                } else if (adminDetails.equals("User"))
+                {
                     startActivity(new Intent(SpleshActivity.this, UserHomeActivity.class));
                     finish();
                 }

@@ -138,7 +138,7 @@ public class MoneyAddingFragment extends Fragment
                 }
                 else
                 {
-                    addAmount(stringsUid,"UserDetails");
+                    addAmount(stringsUid,FirebaseUtils.USERS_DETAILS_STRING);
                     Toasty.success(context,"Amount Added Successfully", Toast.LENGTH_LONG).show();
                     Fragment fragment=new AllUserDetails(context);
                     commonFragment(fragment);
@@ -151,10 +151,10 @@ public class MoneyAddingFragment extends Fragment
     }
     public void gettingUserDetails() {
 
-        databaseReference.child("UserDetails").addChildEventListener(new ChildEventListener() {
+        databaseReference.child(FirebaseUtils.USERS_DETAILS_STRING).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                String name = dataSnapshot.child("userName").getValue(String.class);
+                String name = dataSnapshot.child(FirebaseUtils.USER_NAME_STRING).getValue(String.class);
                 String st=dataSnapshot.getKey();
                 userDetails.add(new UserDetails(name, st,false));
                 usersShowingFunction();
@@ -193,13 +193,12 @@ public class MoneyAddingFragment extends Fragment
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
             {
-
                 for (int it=0;it<st.size();it++)
                 {
-                if (dataSnapshot.child(st.get(it).toString()).child("Amount").child(ExpanseFragment.currentDate).exists())
+                if (dataSnapshot.child(st.get(it).toString()).child(FirebaseUtils.USER_AMOUNT).child(ExpanseFragment.currentDate).exists())
                 {
                     final int finalIt = it;
-                    databaseReference.child(path).child(st.get(it).toString()).child("Amount").child(ExpanseFragment.currentDate).addListenerForSingleValueEvent(new ValueEventListener() {
+                    databaseReference.child(path).child(st.get(it).toString()).child(FirebaseUtils.USER_AMOUNT).child(ExpanseFragment.currentDate).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             String amount=dataSnapshot.getValue(String.class);
@@ -207,8 +206,7 @@ public class MoneyAddingFragment extends Fragment
                             float aa=Float.parseFloat(amountTextView.getText().toString());
                             float total=a+aa;
                             String finalAmount=String.valueOf(total);
-
-                                databaseReference.child(path).child(st.get(finalIt)).child("Amount").child(ExpanseFragment.currentDate).setValue(finalAmount);
+                            databaseReference.child(path).child(st.get(finalIt)).child(FirebaseUtils.USER_AMOUNT).child(ExpanseFragment.currentDate).setValue(finalAmount);
                         }
 
                         @Override
@@ -219,7 +217,7 @@ public class MoneyAddingFragment extends Fragment
                 }
                 else
                 {
-                        databaseReference.child(path).child(st.get(it)).child("Amount").child(ExpanseFragment.currentDate).setValue(amountTextView.getText().toString());
+                        databaseReference.child(path).child(st.get(it)).child(FirebaseUtils.USER_AMOUNT).child(ExpanseFragment.currentDate).setValue(amountTextView.getText().toString());
                 }
                 }
             }

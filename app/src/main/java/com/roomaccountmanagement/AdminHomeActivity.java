@@ -40,6 +40,8 @@ import java.util.List;
 
 import adminFragment.AllUserDetails;
 import adminFragment.ExpanseFragment;
+import adminFragment.MoneyAddingFragment;
+import adminFragment.MoneyCalculateFragment;
 import adminFragment.UserDetailsInFragment;
 import adminPackage.AdminRecyclerAdapter;
 import adminPackage.AdminSideUserDetails;
@@ -53,7 +55,7 @@ public class AdminHomeActivity extends AppCompatActivity
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
     private FirebaseUser firebaseUser;
-    private TextView userNavTextView, todayNavExpanseTextView;
+    private TextView userNavTextView, todayNavExpanseTextView,navgationCalcualteTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +82,8 @@ public class AdminHomeActivity extends AppCompatActivity
         userNavTextView.setOnClickListener(this);
         todayNavExpanseTextView = (TextView) findViewById(R.id.nav_today_expanse);
         todayNavExpanseTextView.setOnClickListener(this);
+        navgationCalcualteTextView=(TextView)findViewById(R.id.nav_calcualte);
+        navgationCalcualteTextView.setOnClickListener(this);
         Fragment fragment = new AllUserDetails(this);
         commonFragment(fragment);
     }
@@ -133,6 +137,12 @@ public class AdminHomeActivity extends AppCompatActivity
             case R.id.nav_today_expanse:
                 Fragment fragment1 = new ExpanseFragment(this);
                 commonFragment(fragment1);
+                drawerClose();
+                break;
+
+            case R.id.nav_calcualte:
+                Fragment fragment2 = new MoneyCalculateFragment(this);
+                commonFragment(fragment2);
                 drawerClose();
                 break;
 
