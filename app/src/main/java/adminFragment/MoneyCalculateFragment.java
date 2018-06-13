@@ -34,6 +34,8 @@ public class MoneyCalculateFragment extends Fragment
     private Context context;
     private TotalMoneyCalculate totalMoneyCalculate;
 
+    private ArrayList<String> userUid=new ArrayList<>();
+    private  FirebaseUtils firebaseUtils;
     @BindView(R.id.starting_date_picker)
     TextView startingDate;
     @BindView(R.id.ending_date_picker)
@@ -63,6 +65,9 @@ public class MoneyCalculateFragment extends Fragment
     {
         unbinder= ButterKnife.bind(this,view);
         totalMoneyCalculate=new TotalMoneyCalculate(context);
+        firebaseUtils=new FirebaseUtils(context);
+        userUid.addAll(firebaseUtils.gettingUserKey(FirebaseUtils.USERS_DETAILS_STRING));
+        Log.d("StringDateVal"," "+userUid.size());
     }
 
     @Override
@@ -103,6 +108,11 @@ public class MoneyCalculateFragment extends Fragment
     @OnClick(R.id.calculate_money_fragment)
     public void onClickThree(View view)
     {
-        totalMoneyCalculate.dateChecking(FirebaseUtils.USERS_DETAILS_STRING,FirebaseUtils.USER_AMOUNT);
+        userUid.clear();
+        userUid.addAll(firebaseUtils.gettingUserKey(FirebaseUtils.USERS_DETAILS_STRING));
+        Log.d("StringDateVal1"," "+userUid.size());
+        float totalAmount=totalMoneyCalculate.gettingTotalMoney(FirebaseUtils.USERS_DETAILS_STRING,userUid);
+        Log.d("StringTotalAmount"," "+totalAmount);
     }
+
 }

@@ -24,7 +24,7 @@ public class UserDetailsAdpater extends RecyclerView.Adapter<UserDetailsAdpater.
 
     private ArrayList<UserDetails> strings;
     private Context context;
-     float i=0;
+    float i=0;
     public UserDetailsAdpater(ArrayList<UserDetails> strings, Context context) {
         this.strings = strings;
         this.context = context;

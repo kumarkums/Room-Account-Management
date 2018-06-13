@@ -15,10 +15,14 @@ import com.roomaccountmanagement.MyCommon;
 
 import java.util.ArrayList;
 
+import Utils.CustomDialog;
+import Utils.CustomProgressDialog;
 import adminPackage.AdminDetails;
+import interfacePackage.GettingUserUid;
 import userDetails.UserDetails;
 
-public class FirebaseUtils {
+public class FirebaseUtils implements GettingUserUid{
+
     public static FirebaseAuth firebaseAuth;
     public static FirebaseUser firebaseUser;
     public static DatabaseReference databaseReference;
@@ -32,7 +36,10 @@ public class FirebaseUtils {
     public static String USER_PHONENUMBER_STRING="userPhoneNumber";
     public static String USER_AMOUNT="Amount";
 
+    private ArrayList<String> userDetails=new ArrayList<>();
+    private ArrayList<String> arrayList= new ArrayList<>();
     private Context context;
+
 
     public FirebaseUtils(Context mContext) {
         this.context = mContext;
@@ -93,43 +100,51 @@ public class FirebaseUtils {
         });
     }
 
-   /* public ArrayList<String> gettingUserKey(String path)
+    @Override
+    public ArrayList<String> gettingUserKey(String path)
     {
-        final ArrayList<String> arrayList= new ArrayList<>();
-        arrayList.clear();
         databaseReference = getDatabaseReference();
-        databaseReference.child(path).addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                String userKey=dataSnapshot.getKey();
-                final ArrayList<String> userDetails=new ArrayList<>();
-                userDetails.add(userKey);
-                arrayList.addAll(userDetails);
-                Log.d("StringDateValues"," "+arrayList);
-            }
+        if (arrayList.size() == 0)
+        {
+            databaseReference.child(path).addChildEventListener(new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s)
+                {
+                    String userKey=dataSnapshot.getKey();
+                    arrayList.add(userKey);
+                  //  arrayList.addAll(userDetails);
+                    Log.d("StringDateValues"," "+userDetails);
+                }
 
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
-            }
+                }
 
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
 
-            }
+                }
 
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
 
-            }
+                }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
-        Log.d("StringDateValues12"," "+arrayList);
+                }
+            });
+
+            Log.d("StringDateValues12"," "+arrayList.size());
+            return arrayList;
+        }
+        else
+        {
+
+        }
+
         return arrayList;
-    }*/
-
+    }
 }
